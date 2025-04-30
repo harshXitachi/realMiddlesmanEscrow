@@ -21,7 +21,37 @@
   # Enable bundling
   node_bundler = "esbuild"
 
+[[headers]]
+  # Define headers for the API paths
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept"
+
 [[redirects]]
+  # Handle specific authentication endpoints
+  from = "/api/register"
+  to = "/.netlify/functions/api"
+  status = 200
+
+[[redirects]]
+  from = "/api/login"
+  to = "/.netlify/functions/api"
+  status = 200
+
+[[redirects]]
+  from = "/api/verify-email"
+  to = "/.netlify/functions/api"
+  status = 200
+
+[[redirects]]
+  from = "/api/user"
+  to = "/.netlify/functions/api"
+  status = 200
+
+[[redirects]]
+  # Handle all other API routes
   from = "/api/*"
   to = "/.netlify/functions/index"
   status = 200
