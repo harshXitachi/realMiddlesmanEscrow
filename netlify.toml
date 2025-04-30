@@ -6,7 +6,12 @@
   publish = "dist/public"
 
   # Default build command
-  command = "npm run build"
+  command = "npm ci && npm run build"
+
+[build.environment]
+  # Helps with package installation on Netlify
+  NPM_FLAGS = "--legacy-peer-deps"
+  NODE_VERSION = "18"
 
 [functions]
   # Directory for serverless functions
@@ -14,7 +19,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/netlify"
   status = 200
 
 [[redirects]]
