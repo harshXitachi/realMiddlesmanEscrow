@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Base colors */
+  --background: 220 33% 98%;
+  --foreground: 222 47% 11%;
+  
+  /* Primary gradient colors */
+  --primary-dark: 222 78% 31%; /* #1A2980 */
+  --primary-light: 180 73% 48%; /* #26D0CE */
+  
+  /* Accent colors */
+  --accent: 45 100% 51%; /* #FFC107 */
+  
+  /* Status colors */
+  --success: 142 71% 45%; /* #10B981 */
+  --warning: 38 92% 50%; /* #FBBF24 */
+  --danger: 0 84% 60%; /* #EF4444 */
+  
+  /* UI colors */
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 222 78% 31%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 14% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 8% 46%;
+  --accent: 45 100% 51%;
+  --accent-foreground: 24 10% 10%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 224 71% 45%;
+  
+  /* Radius */
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 20% 98%;
+  
+  /* UI colors in dark mode */
+  --card: 222 47% 11%;
+  --card-foreground: 210 20% 98%;
+  --popover: 222 47% 11%;
+  --popover-foreground: 210 20% 98%;
+  --primary: 222 78% 31%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 19% 27%;
+  --secondary-foreground: 210 20% 98%;
+  --muted: 217 19% 27%;
+  --muted-foreground: 215 16% 65%;
+  --accent: 45 100% 51%;
+  --accent-foreground: 24 10% 10%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 217 19% 27%;
+  --input: 217 19% 27%;
+  --ring: 224 71% 45%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    @apply font-semibold;
+  }
+}
+
+/* Custom component classes */
+.gradient-bg {
+  @apply bg-gradient-to-r from-primary-dark to-primary-light;
+}
+
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-dark to-primary-light;
+}
+
+.glassmorphism {
+  @apply bg-white/25 backdrop-blur-md border border-white/20 shadow-lg;
+}
+
+.dark .glassmorphism {
+  @apply bg-gray-900/60 border-gray-800/30;
+}
+
+.neumorphic {
+  @apply bg-gradient-to-tl from-gray-100 to-white shadow-md hover:shadow-lg transition-all;
+}
+
+.dark .neumorphic {
+  @apply bg-gradient-to-tl from-gray-800 to-gray-700;
+}
+
+.transaction-card {
+  @apply transition-all duration-300 ease-in-out hover:translate-y-[-5px];
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-primary-dark to-primary-light text-white font-medium 
+    shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary/50;
+}
+
+.btn-accent {
+  @apply bg-accent text-black font-medium shadow-md hover:shadow-lg 
+    transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-accent/50;
+}
+
+.transaction-status {
+  @apply flex items-center;
+}
+
+.transaction-status::before {
+  content: '';
+  @apply inline-block w-2 h-2 rounded-full mr-1.5;
+}
+
+.status-complete::before, .status-completed::before {
+  @apply bg-success;
+}
+
+.status-progress::before, .status-in_progress::before {
+  @apply bg-warning;
+}
+
+.status-dispute::before, .status-disputed::before {
+  @apply bg-danger;
+}
+
+.status-pending::before {
+  @apply bg-gray-400;
+}
+
+.status-cancelled::before {
+  @apply bg-gray-500;
+}
+
+/* Animation classes */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.notification-badge {
+  animation: pulse 2s infinite;
+}
+
+.progress-bar {
+  transition: width 1s ease-in-out;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
