@@ -12,14 +12,18 @@
   # Helps with package installation on Netlify
   NPM_FLAGS = "--legacy-peer-deps"
   NODE_VERSION = "18"
+  # Fix for ESM modules
+  NODE_OPTIONS = "--experimental-modules"
 
 [functions]
   # Directory for serverless functions
-  directory = "dist"
+  directory = "netlify/functions"
+  # Enable bundling
+  node_bundler = "esbuild"
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/netlify"
+  to = "/.netlify/functions/index"
   status = 200
 
 [[redirects]]
